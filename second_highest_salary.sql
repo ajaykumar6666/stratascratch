@@ -1,4 +1,5 @@
-# # Write your MySQL query statement below
-
-select max(salary) "SecondHighestSalary" from Employee where salary not in (
-select max(salary) from Employee);
+select salary from(
+select salary,
+rank() over(order by salary desc) second_highest
+from employee)a 
+where second_highest=2;
