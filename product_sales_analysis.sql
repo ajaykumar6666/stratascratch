@@ -1,7 +1,6 @@
 # Write your MySQL query statement below
 
-select product_id,year first_year,quantity,price from(
-select sale_id,product_id,year,quantity,price,
-rank() over(partition by product_id order by year asc) rnkk
-from Sales)a
-where rnkk=1
+select product_name,year,price from(
+select s.sale_id, p.product_name,s.year,s.price from Product p
+join Sales s on p.product_id = s.product_id
+group by s.sale_id)a
